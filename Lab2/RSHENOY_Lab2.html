@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<!-- saved from url=(0117)https://blackboard.iit.edu/bbcswebdav/pid-687691-dt-content-rid-11564557_1/courses/X9102776.201910/lab2-template.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<!-- Modify Title between these comments (Choose correct class number and substitute your username) -->
+	<title>ITMD 565 Lab 2 - RSHENOY - Simple Calculator</title>
+	<!-- Modify Title between these comments -->
+	<style type="text/css">
+		body {
+			background-color: #ddd;
+			font-family: sans-serif;
+		}
+		#main-container {
+			width: 750px;
+			background-color: white;
+			margin:0 auto;
+			text-align: center;
+			padding: 10px;
+		}
+		#calculator-wrapper #input-wrapper {
+			margin: 40px 0 20px;
+		}
+		#calculator-wrapper #input-wrapper label {
+			font-size: 18px;
+			margin: 0 4px;
+			font-style: italic;
+		}
+		#calculator-wrapper #input-wrapper input {
+			font-size: 20px;
+			padding: 4px;
+			border: 2px solid #bbb;
+			background-color: #eee;
+		}
+		#calculator-wrapper #button-wrapper {
+			margin: 20px 0;
+		}
+		#calculator-wrapper #button-wrapper button {
+			font-size: 20px;
+			margin: 0 5px;
+		}
+		#results {
+			margin: 20px;
+			background-color: #eee;
+			border: 2px solid #bbb;
+			font-size: 24px;
+			padding: 14px;
+			overflow-x: auto;
+			min-height: 25px;
+		}
+	</style>
+</head>
+<body>
+	<div id="main-container">
+		<!-- Modify headlines between these comments (Choose correct class number and substitute Name and Email) -->
+		<h1>ITMD 565 - Lab 2 - Simple Calculator</h1>
+		<h2>Ritesh Shenoy - rshenoy@hawk.iit.edu</h2>
+		<!-- Modify headlines between these comments -->
+		<div id="calculator-wrapper">
+			<div id="input-wrapper">
+				<label>Value 1: <input type="text" name="val1" id="val1"></label>
+				<label>Value 2: <input type="text" name="val2" id="val2"></label>
+			</div>
+			<div id="button-wrapper">
+				<button id="addBtn">Add</button>
+				<button id="subBtn">Subtract</button>
+				<button id="multBtn">Multiply</button>
+				<button id="divBtn">Divide</button>
+				<button id="resetBtn">Reset</button>
+			</div>
+			<div id="results"></div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		// Begin JavaScript Code Here - Do not put JavaScript outside these comments.
+
+        /* A program to try implement some of the JavaScript syntax, event handling, and
+           basic DOM manipulation similar to what we discussed in class.*/
+		
+		//Reset button event listener
+		document.getElementById('resetBtn').addEventListener('click',resetValues ,false);
+
+
+		//Reset all the input values and results
+		function resetValues() {
+			document.getElementById('val1').value = '';
+			document.getElementById('val2').value = '';
+			document.getElementById('results').innerHTML = '';
+		}
+
+        //Validate the Values
+		function checkValues() {
+            
+			//Get Temperory values from TextBoxes
+			var tempValue1 = document.getElementById('val1').value;
+			var tempValue2 = document.getElementById('val2').value;
+
+			//To check whether the input contains characters
+		    if(isNaN(tempValue1) || isNaN(tempValue2)) {
+				alert("Value 1 or Value 2 is not a number"); 
+				resetValues();
+				return false;
+			}
+             
+			//Get values to Validate
+			var value1 = parseInt(tempValue1.trim());
+		    var value2 = parseInt(tempValue2.trim());
+			
+			//For Blanks Values1
+			if (value1 === '') {
+				alert("Value 1 cannot be empty");
+				resetValues();
+				return false;
+			} else if (value2 === '') {   //For Blanks Values2
+				alert("Value 2 cannot be empty");
+				return false;
+			}
+			else if(isNaN(value1)) {  //Validation for not a number 
+				alert("Value 1 is not a number"); 
+				resetValues();
+				return false;
+			} else if(isNaN(value2)) { //Validation for not a number 
+				alert("Value 2 is not a number"); 
+				return false;
+			}
+			return true;
+		}
+        
+		//Add Two numbers from the TextBoxes Value 1 and Value 2
+		document.getElementById('addBtn').addEventListener('click',function(){
+			var value1 = parseInt(document.getElementById('val1').value.trim());
+		    var value2 = parseInt(document.getElementById('val2').value.trim());
+			if (checkValues()) {
+				document.getElementById('results').innerHTML = value1 + value2;
+			} else {
+				alert("Some Problem in the values")
+			}
+	
+		},false);
+
+		//Subtract Two numbers from the TextBoxes Value 1 and Value 2
+		document.getElementById('subBtn').addEventListener('click',function(){
+			var value1 = parseInt(document.getElementById('val1').value.trim());
+		    var value2 = parseInt(document.getElementById('val2').value.trim());
+			if (checkValues()) {
+				document.getElementById('results').innerHTML = value1 - value2;
+			} else {
+				alert("Some Problem in the values")
+			}
+		},false);
+
+		//Multiply Two numbers from the TextBoxes Value 1 and Value 2
+		document.getElementById('multBtn').addEventListener('click',function(){
+			var value1 = parseInt(document.getElementById('val1').value.trim());
+		    var value2 = parseInt(document.getElementById('val2').value.trim());
+			if (checkValues()) {
+				document.getElementById('results').innerHTML = value1 * value2;
+			} else {
+				alert("Some Problem in the values")
+			}
+		},false);
+
+		//Divide Two numbers from the TextBoxes Value 1 and Value 2
+		document.getElementById('divBtn').addEventListener('click',function(){
+			var value1 = parseInt(document.getElementById('val1').value.trim());
+		    var value2 = parseInt(document.getElementById('val2').value.trim());
+			if (checkValues()) {
+				if (value2!= 0 ) {
+					document.getElementById('results').innerHTML = value1 / value2;
+				} else {
+				    alert("Please enter value greater than 0 in Value 2");
+					resetValues();
+				}
+				//document.getElementById('results').innerHTML = value1 / value2;
+			} else {
+				alert("Some Problem in the values")
+			}
+		},false);
+
+		// End JavaScript Code Here - Do not put JavaScript outside these comments.
+		
+	</script>
+
+</body></html>

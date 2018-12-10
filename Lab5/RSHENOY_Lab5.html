@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<title>ITMD-565 Lab 5 - Canvas Drawing</title>
+	<style type="text/css">
+		#content-wrapper {
+			width: 600px;
+			margin: 0 auto;
+			text-align: center;
+		}
+		#canvasRun {
+			background-color: #c00;
+			border: 0;
+			color: #fff;
+		}
+	</style>
+</head>
+<body>
+	<div id="content-wrapper">
+		<button id="canvasRun">Draw Canvas</button><br><br>
+		<canvas id="myCanvas" width="600" height="450"></canvas>
+	</div>
+	<script type="text/javascript">
+		// Canvas Drawing Code Here
+		//Button for loading the canvas on the page
+		var buttonClick = document.getElementById('canvasRun');
+		buttonClick.style.cursor = 'pointer';
+		buttonClick.addEventListener('click',onClickEvent,false);
+
+		var canvasView = document.getElementById('myCanvas');
+		var context = canvasView.getContext("2d");
+		var i = 0;
+		var start = 1.5;
+		var end = 2.5;
+
+	
+		function onClickEvent(){
+
+			// Create gradient color for canvas background
+			var gradientColor = context.createLinearGradient(0,425,0,0);
+			gradientColor.addColorStop(0,"black");
+			gradientColor.addColorStop(1,"white");
+
+			context.fillStyle = gradientColor;
+			context.fillRect(0, 0, 600, 450);
+
+			//Disable the button so that reduntant iteration doesn't occur
+			document.getElementById("canvasRun").disabled = true;
+			
+			//For rotation of the rectangle
+			context.save();
+			context.translate(500,150);
+			context.rotate(i *Math.PI /180);
+			drawRectangle();
+			i += 0.4;
+			context.restore();
+			drawHeaderText();
+			displayImage();
+			drawArc();
+			drawCurve();
+			drawTriangle();
+			drawCircle();
+
+			requestAnimationFrame(onClickEvent);
+			
+		}
+		
+		//Draw a header and other related text
+		function drawHeaderText() {
+
+			context.font = '14px Sans-Serif';
+			context.fillStyle = 'white';
+			context.fillText('Ritesh Shenoy B', 30, 410);
+
+			context.font = '14px Sans-Serif';
+			context.fillStyle = 'white';
+			context.fillText('rshenoy@hawk.iit.edu', 30, 430);
+
+			context.font = '32px Sans-Serif';
+			context.fillStyle = '#C80000';
+			context.fillText('ITMD 565 Canvas Lab', 150, 50);
+		
+			context.strokeStyle = '#C80000';
+			context.moveTo(30,70)
+			context.lineTo(570,70);
+			context.lineWidth = 2;
+			context.stroke();
+			
+		}
+
+		
+		//Draw circle with filled color blue
+		function drawCircle(){
+			context.beginPath();
+			context.arc(125,150,60,0,2*Math.PI);
+			context.fillStyle = '#0000C8';
+			context.fill();
+
+			context.lineWidth = 3;
+			context.strokeStyle = 'white';
+			context.stroke();
+			context.closePath();
+		}
+
+		//Draw Rectangle with rotation
+		function drawRectangle(){
+				
+			context.beginPath();
+			context.fillStyle = '#C80000';
+			context.fillRect(-50,-50,100,100);
+			context.lineWidth = 3;
+			context.strokeStyle = 'white';	
+			context.strokeRect(-50,-50,100,100);	
+			context.stroke();
+			i += 0.5;
+			context.closePath();
+		}
+		
+		//Draw Image with image IIT_SAT_stack_186_white.png
+		function displayImage() {
+			var iitImage = new Image();
+			iitImage.src = 'IIT_SAT_stack_186_white.png';
+			context.drawImage(iitImage, 360, 380, 220, 50);			
+		}
+
+		//Draw Triangle with color green
+		function drawTriangle() {
+			context.beginPath();
+			context.moveTo(120, 260);
+			context.lineTo(60, 360);
+			context.lineTo(180, 360);
+			context.fillStyle = '#00C800'; 
+			context.fill();
+			context.closePath();
+		}
+		
+		//Draw bezire curve for with a rectangular background and having black color as style
+		function drawCurve() {
+		context.beginPath();
+		context.fillStyle = 'white';
+		context.fillRect(270, 270, 300, 90);
+		context.strokeStyle = 'black';
+		context.setLineDash([8, 8]);
+
+		context.lineWidth = 2;
+		context.moveTo(290, 325);
+		context.bezierCurveTo(410, 210, 410, 400, 550, 310);
+		context.stroke();
+		context.setLineDash([]);
+		context.closePath();
+		}
+
+		//Draw Arc which is rotating and having color orange
+		function drawArc() {
+			context.beginPath();
+			context.strokeStyle = '#FFA500';
+			context.lineWidth = 12;
+			context.arc(320, 150, 50, start * Math.PI, end * Math.PI);
+			context.stroke();
+			start += 0.03;
+			end += 0.03;
+			context.closePath();
+		}
+
+	</script>
+
+</body></html>
