@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>ITMD 565 Lab 4 - RITESH SHENOY B</title>
+	<style type="text/css">
+		body {
+			font-family: sans-serif;
+		}
+
+		#main-container {
+			width: 900px;
+			margin: 0 auto;
+			text-align: center;
+		}
+
+		#button-wrapper-css button {
+			display: inline-block;
+			margin: 25px 10px 25px 0;
+			min-width: 100px;
+			background-color: #eee;
+		}
+
+		table {
+			width: 100%;
+		}
+
+		table,th,td {
+			border: 1px solid black;
+			border-collapse: collapse;
+			padding: 7px;
+			text-align: center;
+		}
+
+		tr:nth-child(even) {
+			background-color: #fff;
+		}
+
+		tr:nth-child(odd) {
+			background-color: #eee;
+		}
+
+		th {
+			background-color: #C0C0C0;
+			color: black;
+		}
+
+		.green {
+			background-color: #47C55E;
+		}
+
+		.red {
+			background-color: #DA3815;  
+		}
+	</style>
+</head>
+
+<body>
+	<div id="main-container">
+
+		<h1>ITMD 565 - Lab 4</h1>
+		<h2>RITESH SHENOY B - rshenoy@hawk.iit.edu</h2>
+		<div id="button-wrapper-css">
+			<button id="loadButton" >Load Data</button>
+			<button id="resetButton" >Reset</button>
+		</div>
+		<h3>Employee List</h3>
+		<div id="table-data-container">
+			<table id="dataTable-id">
+				<tr>
+					<th>ID</th>
+					<th>First Name</b></th>
+					<th>Last Name</b></th>
+					<th>Title</b></th>
+					<th>Email</b></th>
+					<th>Gender</b></th>
+					<th>Active</b></th>
+				</tr>
+			</table>
+		</div>
+		<script type="text/javascript">
+
+				//Function added to the Load data button as click event handler with the addEventListener
+				var loadDataButton = document.getElementById('loadButton');
+				loadDataButton.style.cursor = 'pointer';
+				loadDataButton.addEventListener('click', loadJsonData, false);
+
+				//Function added to the reset button as click event handler with the addEventListener
+				var resetDataButton = document.getElementById('resetButton');
+				resetDataButton.addEventListener('click', resetDataFunction, false);
+				resetDataButton.style.cursor = 'pointer';
+				resetDataButton.disabled = true;
+
+				//Variable referes to table ID
+				var dataTableObject = document.getElementById('dataTable-id');
+
+				//Function to reset the json data
+				function resetDataFunction() {
+					resetDataButton.disabled = true;
+					var rowCount = dataTableObject.rows.length;
+					loadDataButton.disabled = false;
+					for (var rest_count = rowCount - 1; rest_count > 0; rest_count--) {
+						dataTableObject.deleteRow(rest_count);
+					}				
+				}
+
+				// Function which reads the GET request from the link give and stores the json array objects
+				function loadJsonData() {
+					var myRequest = new XMLHttpRequest();
+					myRequest.onreadystatechange = function () {
+						if (myRequest.readyState === 4 && myRequest.status === 200) {
+							var jsonArray = JSON.parse(myRequest.responseText);
+							if (Array.isArray(jsonArray)) {
+								parseJsonData(jsonArray);
+							} else {
+								console.log(jsonArray);
+							}
+						}
+					}
+					myRequest.open('GET', 'http://libertyville.rice.iit.edu/scripts/4565_lab4.php', true);
+					myRequest.send();
+					//once the data is loaded the resent button is enabled
+					resetDataButton.disabled = false;
+					//once the data is loaded the load button is disabled
+					loadDataButton.disabled = true;
+				}
+
+				//Functions places respective json objects in the respective table column
+				var mainTable = document.getElementById("table-data-container");
+
+				// This functions retreives respective json objects and parses it into respective table column
+				function parseJsonData(jsonTempArray) {
+					for (var i = 0; i < jsonTempArray.length; i++) {
+						var rowData = document.createElement('tr');
+						dataTableObject.appendChild(rowData);
+
+						//Var for table ID
+						var idCell = document.createElement('td');
+						idCell.innerHTML = jsonTempArray[i].id;
+						// Var for table FirstName
+						var firstName = document.createElement('td');
+						firstName.innerHTML = jsonTempArray[i].first_name;
+						// Var for table LastName
+						var lastName = document.createElement('td');
+						lastName.innerHTML = jsonTempArray[i].last_name;
+						//Var for table email
+						var email = document.createElement('td');
+						email.innerHTML = jsonTempArray[i].email;
+						//Var for table gender
+						var gender = document.createElement('td');
+						gender.innerHTML = jsonTempArray[i].gender;
+						//Var for table designation
+						var designation = document.createElement('td');
+						designation.innerHTML = jsonTempArray[i].title;
+						//Var for table active status
+						var status = document.createElement('td');
+						status.innerHTML = jsonTempArray[i].active;
+
+						//Appends each element to the table to the respective column
+						rowData.appendChild(idCell);
+						rowData.appendChild(firstName);
+						rowData.appendChild(lastName);
+						rowData.appendChild(designation);
+						rowData.appendChild(email);
+						rowData.appendChild(gender);
+						rowData.appendChild(status);
+					};
+					mainTable.appendChild(dataTableObject);
+
+					// This variable is used to highlight the status of the cell
+					var statusHighlight = dataTableObject.getElementsByTagName('td');
+
+					// 	this loop highlights the active employess in green and rest in red
+					for (var x = 0; x < statusHighlight.length; x++) {
+						if (statusHighlight[x].innerHTML === 'true') {
+							statusHighlight[x].className = 'green';
+						}
+						else if (statusHighlight[x].innerHTML === 'false') {
+							statusHighlight[x].className = 'red';
+						}
+					}
+				}
+		</script>
+</body>
+
+</html>
