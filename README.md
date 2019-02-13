@@ -7,6 +7,8 @@
 
 #### Hello all, 
 #### RITESH B SHENOY
+I am a graduate student pursuing my masters degree in Information Technology and Management at Illinois Institute Of technology. My specialization is Software Developement.
+
 #### EDUCATION:
 Master of Science in Information Technology & Management Expected May 2020
 Illinois Institute of Technology, Chicago, IL GPA: 4.0/4.0
