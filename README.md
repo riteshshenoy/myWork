@@ -7,9 +7,6 @@
 
 #### Hello all, 
 #### RITESH B SHENOY
-PROFESSIONAL SUMMARY:
-Full stack Lead Android Developer with comprehensive 4 years of experience as an architect and developing cutting-edge Android
-Applications, Offline map Applications and GPS Applications for the navigational, transportation industries.
 #### EDUCATION:
 Master of Science in Information Technology & Management Expected May 2020
 Illinois Institute of Technology, Chicago, IL GPA: 4.0/4.0
