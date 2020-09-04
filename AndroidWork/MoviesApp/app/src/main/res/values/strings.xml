@@ -2,11 +2,19 @@
     <string name="app_name">MoviesApp</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="movie_title">Movie Title…Coming Soon...</string>
+    <string name="movie_overView">The Movie Title is empty for this…Coming Soon...</string>
+    <string name="movie_genres">The Movie Title is empty for this…Coming Soon...</string>
+    <string name="popularity_label">000.000</string>
+    <string name="average_label">7.8</string>
+    <string name="overviewLabel">Overview</string>
+    <string name="original_title">Original title</string>
+    <string name="original_language">en</string>
+    <string name="movie_image">This is poster image</string>
+    <string name="chart_label">Chart</string>
+    <string name="movie_title_name">Movie Title</string>
+    <string name="release_label">Release</string>
+    <string name="poster_image_label">This is poster image</string>
+    <string name="backdrop_image_label">this is backdrop image</string>
+    <string name="overview_value">sljcnsfiewvbfiwevfwevfiwebfoubebifueruiifueifbueruibvuierebiuerbviuebgeruobiuerbuoervbuieruivberiuvberiuvberuivbeiruvbiuvbiuviuivuberiuuivberiuvbievieruie</string>
 </resources>
